@@ -65,42 +65,69 @@ class indexSwiper {
             }
             if (i == 0) {// top
                 span.style.webkitTransformOrigin = span.style.transformOrigin = 'top';
-                span.style.webkitTransform = span.style.transform = `translateZ(-${itemHeight}px) rotateX(90deg)`;
-                span.style.backgroundImage = `url(img/banner1.jpg)`;
+                span.style.webkitTransform = span.style.transform = `translateZ(-${this.itemHeight}px) rotateX(90deg)`;
             }
-            if (i == 2) {// left
+            if (i == 1) {// front
+                span.style.backgroundImage = `url(${this.imageList[this.pageNum]})`;
+            }
+            if (i == 2) {// bottom
+                span.style.webkitTransformOrigin = span.style.transformOrigin = 'bottom';
+                span.style.webkitTransform = span.style.transform = `translateZ(-${this.itemHeight}px) rotateX(-90deg)`;
+            }
+            if (i == 3) {// left
                 span.style.webkitTransformOrigin = span.style.transformOrigin = 'left';
                 span.style.webkitTransform = span.style.transform = 'rotateY(90deg)';
             }
-            if (i == 3) {// right
+            if (i == 4) {// right
                 span.style.webkitTransformOrigin = span.style.transformOrigin = 'left';
-                span.style.webkitTransform = span.style.transform = `translateX(${itemWidth}px) rotateY(90deg)`;
+                span.style.webkitTransform = span.style.transform = `translateX(${this.itemWidth}px) rotateY(90deg)`;
             }
             cubeItem.appendChild(span);
         }
     }
-    animate() {
-        const cubeItem = $('.slide').querySelectorAll('.cube-item');
+    animate(direction) {
+        if (!this.status) {// 判断是否可轮播
+            return;
+        }
+        this.status = false;// 动画结束前不可轮播
+        const cubeItem = this.swiper.querySelectorAll('.cube-item');
         for (var i = 0, len = cubeItem.length; i < len; i++) {
             ((index) => {
                 let itemSpans = cubeItem[index].querySelectorAll('span');
                 cubeItem[index].style.transition = '0.8s -webkit-transform ease';
-                cubeItem[index].style.transformOrigin = `50% 50% -${itemHeight / 2}px`;
-                itemSpans[0].style.backgroundImage = `url(img/banner1.jpg)`;
+                cubeItem[index].style.transformOrigin = `50% 50% -${this.itemHeight / 2}px`;
+                if (direction == 'up') {// 根据方向放置即将显示的图片
+                    itemSpans[0].style.backgroundImage = `url(${this.imageList[this.pageNum]})`;
+                } else {
+                    itemSpans[2].style.backgroundImage = `url(${this.imageList[this.pageNum]})`;
+                }
                 setTimeout(() => {
-                    cubeItem[index].style.transform = 'translateZ(0) rotateX(-90deg)';
+                    cubeItem[index].style.transform = direction == 'up' ? 'translateZ(0) rotateX(-90deg)' : 'translateZ(0) rotateX(90deg)';// 根据方向旋转
                     cubeItem[index].addEventListener('webkitTransitionEnd', () => {// 每个块旋转结束后重置这个块
                         cubeItem[index].style.transition = 'none';
                         cubeItem[index].style.transform = 'translateZ(0px) rotateX(0deg)';
-                        itemSpans[1].style.backgroundImage = `url(img/banner1.jpg)`;
-                        if (index == cubeNum - 1) {// 如果是最后一个块设置可轮播
-                            $('.loading').remove();
-                            window.scrollTo(0, 0);
+                        itemSpans[1].style.backgroundImage = `url(${this.imageList[this.pageNum]})`;
+                        if (index == this.number - 1) {// 如果是最后一个块设置可轮播
+                            this.status = true;
                         }
                     })
                 }, index * 60);
             })(i)
         }
+    }
+    pageUp() {
+        this.pageNum += 1;
+        if (this.pageNum == this.imageList.length) {
+            this.pageNum = 0;
+        }
+        this.animate('up');
+    }
+    pageDown() {
+        this.pageNum -= 1;
+        if (this.pageNum < 0) {
+            this.pageNum = this.imageList.length - 1;
+        }
+        this.animate('down');
     }
 }
 
