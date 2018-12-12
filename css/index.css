@@ -430,8 +430,44 @@
 }
 
 .part2-content {
+    display: flex;
     width: 90%;
-    height: 90%;
+    height: 80%;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.part2-content-item {
+    height: 90%;
+    flex: 1;
+}
+
+.part2-content-item img {
+    height: 100%;
+    width: 80%;
+    object-fit: cover
+}
+
+.word-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ministry Script';
+}
+
+.word-item h1 {
+    margin-bottom: 30px;
+    font-size: 50px;
+}
+
+.word-item p {
+    width: 80%;
+    font-size: 20px;
+    text-transform: capitalize;
+    line-height: 35px;
+    word-spacing: 5px;
 }
