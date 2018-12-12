@@ -48,18 +48,18 @@ class indexSwiper {
                     span.style.webkitTransformOrigin = span.style.transformOrigin = 'top';
                     span.style.webkitTransform = span.style.transform = `translateZ(-${this.itemHeight}px) rotateX(90deg)`;
                     break;
-                case 1:// top
+                case 1:// front
                     span.style.backgroundImage = `url(${this.imageList[this.pageNum]})`;
                     break;
-                case 2:// top
+                case 2:// bottom
                     span.style.webkitTransformOrigin = span.style.transformOrigin = 'bottom';
                     span.style.webkitTransform = span.style.transform = `translateZ(-${this.itemHeight}px) rotateX(-90deg)`;
                     break;
-                case 3:// top
+                case 3:// left
                     span.style.webkitTransformOrigin = span.style.transformOrigin = 'left';
                     span.style.webkitTransform = span.style.transform = 'rotateY(90deg)';
                     break;
-                case 4:// top
+                case 4:// right
                     span.style.webkitTransformOrigin = span.style.transformOrigin = 'left';
                     span.style.webkitTransform = span.style.transform = `translateX(${this.itemWidth}px) rotateY(90deg)`;
                     break;
