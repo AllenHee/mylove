@@ -149,20 +149,20 @@ class indexSwiper {
 //     }
 // })
 
-// $('.classify-icon').addEventListener('click', function () {// 显示分类
-//     this.style.opacity = 0;
-//     $('.classify-cont').style.transform = 'translateX(0)';
-//     $('.classify-wrap').style.width = '100%';
-//     setTimeout(() => {
-//         this.style.display = 'none';
-//     }, 1500);
-// })
+$('.classify-icon').addEventListener('click', function () {// 显示分类
+    this.style.opacity = 0;
+    $('.classify-cont').style.transform = 'translateX(0)';
+    $('.classify-wrap').style.width = '100%';
+    setTimeout(() => {
+        this.style.display = 'none';
+    }, 1500);
+})
 
-// $('.classify-close').addEventListener('click', function () {// 隐藏分类
-//     $('.classify-icon').style.display = 'block';
-//     $('.classify-cont').style.transform = 'translateX(-700px)';
-//     $('.classify-wrap').style.width = '0';
-//     setTimeout(() => {
-//         $('.classify-icon').style.opacity = 1;
-//     });
-// })
+$('.classify-close').addEventListener('click', function () {// 隐藏分类
+    $('.classify-icon').style.display = 'block';
+    $('.classify-cont').style.transform = 'translateX(-700px)';
+    $('.classify-wrap').style.width = '0';
+    setTimeout(() => {
+        $('.classify-icon').style.opacity = 1;
+    });
+})
